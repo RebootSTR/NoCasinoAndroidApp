@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NoCasino</string>
+    <string name="STATIC_SCORE">Score: </string>
+    <string name="spin_button">DO A SPIN!</string>
+    <string name="STATIC_LOSE">YOU LOOOOSER</string>
+    <string name="bet_static">Ставка:</string>
+    <string name="win_points_placeholder">+%1$s</string>
+</resources>
