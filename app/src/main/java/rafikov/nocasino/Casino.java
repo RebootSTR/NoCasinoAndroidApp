@@ -14,7 +14,7 @@ public class Casino {
     private final int winMultiplier9 = 5;
     private final int winMultiplier90 = 0;
 
-    public int cost = 100;
+    private int cost = 100;
 
     private int lastWin;
 
@@ -40,6 +40,10 @@ public class Casino {
         if (newCost > 0) {
             cost = newCost;
         }
+        return cost;
+    }
+
+    public int getCost() {
         return cost;
     }
 

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Button downBetButton = mainBinding.downBetButton;
         Button upBetButton = mainBinding.upBetButton;
         Consumer<Integer> clickAction = (deltaCost) -> {
-            int newCost = casino.setCost(casino.cost + deltaCost);
+            int newCost = casino.setCost(casino.getCost() + deltaCost);
             TextView bet = mainBinding.betTextView;
             bet.setText(String.valueOf(newCost));
             checkScore();
@@ -76,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
             new Thread(() -> {
 
                 while (view.isPressed()) {
-                    if (casino.getMoney() < casino.cost + deltaCost) { // up limiter
+                    if (casino.getMoney() < casino.getCost() + deltaCost) { // up limiter
                         break;
                     }
-                    boolean costChanged = changeCost(casino.cost + deltaCost);
+                    boolean costChanged = changeCost(casino.getCost() + deltaCost);
                     if (!costChanged) { // down limiter
                         break;
                     }
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     int[] slots;
                     try {
                         slots = casino.doSpin();
-                        addPoints(-casino.cost);
+                        addPoints(-casino.getCost());
                     } catch (NoMoneyException ex) {
                         runOnUiThread(() -> Toast.makeText(
                                 getApplicationContext(),
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 doPulse(mainBinding.loseText);
                 buttonPulse.setFalse();
             }
-        } else if (casino.cost > casino.getMoney()) {
+        } else if (casino.getCost() > casino.getMoney()) {
             boolean costChanged = changeCost(casino.getMoney());
             if (!costChanged) { // down limiter
                 runOnUiThread(() -> spinButton.setEnabled(false));
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean changeCost(int needCost) {
         TextView bet = mainBinding.betTextView;
-        int oldCost = casino.cost;
+        int oldCost = casino.getCost();
         int newCost = casino.setCost(needCost);
         if (oldCost == newCost) {
             return false;
